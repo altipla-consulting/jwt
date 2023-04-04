@@ -1,0 +1,35 @@
+{
+  "name": "@altipla/jwt",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Secure and reusable JWT validation for Node.",
+  "scripts": {
+    "lib": "tsc --declaration --esModuleInterop --outDir dist",
+    "lint": "tsc --noEmit && eslint --ext .ts src",
+    "fix": "eslint --fix --ext .ts src",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/altipla-consulting/jwt.git"
+  },
+  "author": "Altipla Consulting",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/altipla-consulting/jwt/issues"
+  },
+  "homepage": "https://github.com/altipla-consulting/jwt#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "devDependencies": {
+    "@altipla/eslint-config-ts": "^0.6.0",
+    "typescript": "^5.0.3"
+  },
+  "dependencies": {
+  }
+}
