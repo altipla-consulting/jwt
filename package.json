@@ -7,7 +7,8 @@
     "lib": "tsc --declaration --esModuleInterop --outDir dist",
     "lint": "tsc --noEmit && eslint --ext .ts src",
     "fix": "eslint --fix --ext .ts src",
-    "test": ""
+    "test": "vitest run",
+    "watch": "vitest watch"
   },
   "repository": {
     "type": "git",
@@ -28,8 +29,12 @@
   "main": "dist/index.js",
   "devDependencies": {
     "@altipla/eslint-config-ts": "^0.6.0",
-    "typescript": "^5.0.3"
+    "@types/jsonwebtoken": "^9.0.1",
+    "typescript": "^5.0.3",
+    "vitest": "^0.29.8"
   },
   "dependencies": {
+    "jsonwebtoken": "^9.0.0",
+    "jwks-rsa": "^3.0.1"
   }
 }
