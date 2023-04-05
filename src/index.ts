@@ -11,7 +11,7 @@ interface Validation {
   audience: string
 }
 
-export async function verifyJWT(config: Validation, token: string, issuer: string, audience: string) {
+export async function verifyJWT(config: Validation, token: string) {
   if (!config.discovery || !config.issuer || !config.audience) {
     throw new Error('missing config')
   }
@@ -35,8 +35,8 @@ export async function verifyJWT(config: Validation, token: string, issuer: strin
   }
   
   return jwt.verify(token, key.getPublicKey(), {
-    issuer,
-    audience,
+    issuer: config.issuer,
+    audience: config.audience,
     algorithms: ['RS256'],
   }) as JwtPayload
 }
