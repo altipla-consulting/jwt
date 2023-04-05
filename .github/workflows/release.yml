@@ -20,6 +20,11 @@ jobs:
       with:
         node-version: '16.x'
       
+    - name: Configure private packages
+      uses: altipla-consulting/setup-private-npm.actions@main
+      with:
+        npm-token: ${{ secrets.NPM_TOKEN }}
+
     - name: Cache node modules
       id: cache-npm
       uses: actions/cache@v3
