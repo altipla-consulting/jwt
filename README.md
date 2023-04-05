@@ -1,5 +1,6 @@
 
 # jwt.js
+
 Secure and reusable JWT validation for Node.
 
 
@@ -20,9 +21,9 @@ async function main() {
     let config = {
       discovery: 'https://example.com/.well-known/jwks.json',
       issuer: 'https://example.com',
-      audience: 'https://example.com',
+      audience: 'foo',
     }
-    let token = "..."
+    let token = '...'
     let payload = await verifyJWT(config, token)
   } catch (error: any) {
     console.error(error)
