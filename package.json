@@ -28,8 +28,11 @@
   "main": "dist/index.js",
   "devDependencies": {
     "@altipla/eslint-config-ts": "^0.6.0",
+    "@types/jsonwebtoken": "^9.0.1",
     "typescript": "^5.0.3"
   },
   "dependencies": {
+    "jsonwebtoken": "^9.0.0",
+    "jwks-rsa": "^3.0.1"
   }
 }
