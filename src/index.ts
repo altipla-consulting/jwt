@@ -20,7 +20,6 @@ export async function verifyJWT(config: Validation, token: string) {
     clients[config.discovery] = jwksClient({
       jwksUri: config.discovery,
       rateLimit: true,
-      jwksRequestsPerMinute: 1,
     })
   }
   let client = clients[config.discovery]

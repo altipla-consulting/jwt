@@ -57,14 +57,14 @@ test('it should verify a token', async () => {
     discovery: 'https://token.dev/jwks/keys.json',
     issuer: 'token.dev',
     audience: 'foo',
-  }, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6InRlc3QtcnNhIn0.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTY4MDcwNDE1MCwiZXhwIjoxNjgwNzA3NzUwLCJhdWQiOiJmb28iLCJpc3MiOiJ0b2tlbi5kZXYifQ.fFnPg-XIrK0l7wrbY4AVFLXezk_Xlq-kVlp9jc3iQ7uSRypMuREN2B0GGUq6GWtBbLSyM-v6zDzRu1n9qOl0Pycs3IkZIb-swj_c38Ju34H9j2c4KxJOZXA2TbMc3mkGKUfsPZaS0ZZmx4KIZfrRIrSS8egwX6YBfR_NCYbXlhQT7RPB1AxJhIz96fIDtdEqzlTyZiT7uApTq1HmN-nGm-PjB_PdlHkCGVN8FWwmPDZfvH2J-GCb7swxqEhPizWBT5VYkIp9rYkCFqCe3bkV1mkk0f1RbVyalMWjEYEdRPGq3GFijWtrSaHzkkGDPijk4BmaGmJNHzKXOAwwMO9b7Q')
+  }, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6InRlc3QtcnNhIn0.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTY4MTExMjI5NiwiZXhwIjo3NjgxMTE1ODk2LCJpc3MiOiJ0b2tlbi5kZXYiLCJhdWQiOiJmb28ifQ.1xOomFEyuK9Wd6cKfhVvJdqmGAJ3B0zEyiW60Wxu6fU0BL3KNTyIkGgm3Zaaea5XRfHpVwtaDHKRYWY9G8ZnQ525S1tG7xLGsOzMWVVfD5xzc7dDErfHQ36xo_j4zcfsWqceT1OSgfdYkz-fzpE_doWuv2srBLhpd9NJ4jyhS3O014GRHl0bsbVFYhMJ1iRleuf7utrIDKibB38uitYQl00hRBatSXMeN1Q3AN0lKUL5x2r8m_L-7G8rvD8zfSy8FhVeVKzNqiczhxcqM3DEq0WiQ6PoahxoOYHTzP5jfiMZ3dzRvO1Eailc8QdniDI0W4AfwyglD7Aq9ORmH_d50w')
   
   expect(result).toEqual({
     'sub': '1234567890',
     'name': 'John Doe',
     'admin': true,
-    'iat': 1680704150,
-    'exp': 1680707750,
+    'iat': 1681112296,
+    'exp': 7681115896,
     'aud': 'foo',
     'iss': 'token.dev',
   })
