@@ -39,3 +39,46 @@ export async function verifyJWT(config: Validation, token: string) {
     algorithms: ['RS256'],
   }) as JwtPayload
 }
+
+interface GeneratorParams {
+  key: string
+  issuer: string
+  audience: string
+}
+
+export class Generator {
+  private key: string
+  private issuer: string
+  private audience: string
+  
+  constructor(private params: GeneratorParams) {
+    if (!params.key || !params.issuer || !params.audience) {
+      throw new Error('missing options')
+    }
+    this.key = params.key
+    this.issuer = params.issuer
+    this.audience = params.audience
+  }
+
+  sign(payload: Record<string, any>, expirationMs: number, subject: string) {
+    if (!expirationMs || !subject) {
+      throw new Error('missing options')
+    }
+
+    return jwt.sign(payload, this.key, {
+      algorithm: 'HS256',
+      expiresIn: `${expirationMs}ms`,
+      audience: this.audience,
+      issuer: this.issuer,
+      subject,
+    })
+  }
+
+  verify(token: string) {
+    return jwt.verify(token, this.key, {
+      algorithms: ['HS256'],
+      audience: this.audience,
+      issuer: this.issuer,
+    }) as JwtPayload
+  }
+}
