@@ -13,7 +13,7 @@ npm install @altipla/jwt
 
 ## Usage
 
-### Verify a public token
+### Verify an asymetric token
 
 ```ts
 import { verifyJWT } from '@altipla/jwt'
@@ -34,7 +34,7 @@ async function main() {
 main()
 ```
 
-### Sign a new token
+### Sign and verify symmetric tokens
 
 ```ts
 import { Generator } from '@altipla/jwt'
@@ -43,41 +43,18 @@ interface Data {
   // ... put your token content here
 }
 
-async function main() {
-  try {
-    let generator = new Generator<Data>({
-      key: 'test-key',
-      issuer: 'token.dev',
-      audience: 'foo',
-    })
-    let token = generator.sign({
-      // ... put your token content here
-    }, 1000, 'test')
-  } catch (error: any) {
-    console.error(error)
-  }
-}
-
-main()
-```
-
-### Verify a signed token
-
-```ts
-import { Generator } from '@altipla/jwt'
-
-interface Data {
-  // ... put your token content here
-}
+let generator = new Generator<Data>({
+  key: 'test-key',
+  issuer: 'https://www.example.com/issuer',
+  audience: 'foo',
+})
 
 async function main() {
+  let token = generator.sign({
+    // ... put your token content here
+  }, 1000, 'test')
+
   try {
-    let generator = new Generator<Data>({
-      key: 'test-key',
-      issuer: 'token.dev',
-      audience: 'foo',
-    })
-    let token = // ... get the token from somewhere
     let data = generator.verify(token)
   } catch (error: any) {
     console.error(error)
