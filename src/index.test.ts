@@ -1,7 +1,6 @@
 
 import { expect, test } from 'vitest'
 import { Generator, verifyJWT } from '.'
-import type { JwtPayload } from 'jsonwebtoken'
 
 test('it should give an error if discovery is missing', async () => {
   await expect(() => {
@@ -72,17 +71,16 @@ test('it should verify a token', async () => {
 })
 
 test('it should sign and verify a token', async () => {
-  let generator = new Generator({
-    key: 'test-rsa',
+  let generator = new Generator<{ foo: string }>({
+    key: 'test-key',
     issuer: 'token.dev',
     audience: 'foo',
   })
-
   let token = generator.sign({
     foo: 'bar',
   }, 1000, 'test')
 
-  let result = generator.verify(token) as JwtPayload & { foo: string }
+  let result = generator.verify(token)
 
   expect(result).toEqual({
     foo: 'bar',
@@ -96,11 +94,10 @@ test('it should sign and verify a token', async () => {
 
 test('it should throw an error if the token is invalid', async () => {
   let generator = new Generator({
-    key: 'test-rsa',
+    key: 'test-key',
     issuer: 'token.dev',
     audience: 'foo',
   })
-
   let token = generator.sign({
     foo: 'bar',
   }, 1000, 'test')

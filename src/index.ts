@@ -46,12 +46,12 @@ interface GeneratorParams {
   audience: string
 }
 
-export class Generator {
+export class Generator<T extends Record<string, any>> {
   private key: string
   private issuer: string
   private audience: string
   
-  constructor(private params: GeneratorParams) {
+  constructor(params: GeneratorParams) {
     if (!params.key || !params.issuer || !params.audience) {
       throw new Error('missing options')
     }
@@ -60,7 +60,7 @@ export class Generator {
     this.audience = params.audience
   }
 
-  sign(payload: Record<string, any>, expirationMs: number, subject: string) {
+  sign(payload: T, expirationMs: number, subject: string) {
     if (!expirationMs || !subject) {
       throw new Error('missing options')
     }
@@ -79,6 +79,6 @@ export class Generator {
       algorithms: ['HS256'],
       audience: this.audience,
       issuer: this.issuer,
-    }) as JwtPayload
+    }) as JwtPayload & T
   }
 }
