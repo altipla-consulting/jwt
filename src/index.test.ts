@@ -1,6 +1,6 @@
 
 import { expect, test } from 'vitest'
-import { verifyJWT } from '.'
+import { Generator, verifyJWT } from '.'
 
 test('it should give an error if discovery is missing', async () => {
   await expect(() => {
@@ -68,4 +68,41 @@ test('it should verify a token', async () => {
     'aud': 'foo',
     'iss': 'token.dev',
   })
+})
+
+test('it should sign and verify a token', async () => {
+  let generator = new Generator<{ foo: string }>({
+    key: 'test-key',
+    issuer: 'token.dev',
+    audience: 'foo',
+  })
+  let token = generator.sign({
+    foo: 'bar',
+  }, 1000, 'test')
+
+  let result = generator.verify(token)
+
+  expect(result).toEqual({
+    foo: 'bar',
+    sub: 'test',
+    aud: 'foo',
+    iss: 'token.dev',
+    iat: expect.any(Number),
+    exp: expect.any(Number),
+  })
+})
+
+test('it should throw an error if the token is invalid', async () => {
+  let generator = new Generator({
+    key: 'test-key',
+    issuer: 'token.dev',
+    audience: 'foo',
+  })
+  let token = generator.sign({
+    foo: 'bar',
+  }, 1000, 'test')
+
+  await expect(() => {
+    return generator.verify(token + 'invalid')
+  }).toThrow('invalid signature')
 })
