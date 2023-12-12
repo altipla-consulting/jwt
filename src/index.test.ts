@@ -76,9 +76,9 @@ test('it should sign and verify a token', async () => {
     issuer: 'token.dev',
     audience: 'foo',
   })
-  let token = generator.sign({
+  let token = generator.sign(1000, 'test', {
     foo: 'bar',
-  }, 1000, 'test')
+  })
 
   let result = generator.verify(token)
 
@@ -93,14 +93,14 @@ test('it should sign and verify a token', async () => {
 })
 
 test('it should throw an error if the token is invalid', async () => {
-  let generator = new Generator({
+  let generator = new Generator<{ foo: string }>({
     key: 'test-key',
     issuer: 'token.dev',
     audience: 'foo',
   })
-  let token = generator.sign({
+  let token = generator.sign(1000, 'test', {
     foo: 'bar',
-  }, 1000, 'test')
+  })
 
   await expect(() => {
     return generator.verify(token + 'invalid')
