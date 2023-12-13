@@ -106,3 +106,21 @@ test('it should throw an error if the token is invalid', async () => {
     return generator.verify(token + 'invalid')
   }).toThrow('invalid signature')
 })
+
+test('it should accept no payload', async () => {
+  let generator = new Generator({
+    key: 'test-key',
+    issuer: 'token.dev',
+    audience: 'foo',
+  })
+
+  let token = generator.sign(1000, 'test')
+  let result = generator.verify(token)
+  expect(result).toEqual({
+    sub: 'test',
+    aud: 'foo',
+    iss: 'token.dev',
+    iat: expect.any(Number),
+    exp: expect.any(Number),
+  })
+})
