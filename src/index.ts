@@ -46,7 +46,7 @@ interface GeneratorParams {
   audience: string
 }
 
-export class Generator<T extends Record<string, any>> {
+export class Generator<T extends Record<string, any> = Record<string, never>> {
   private key: string
   private issuer: string
   private audience: string
@@ -60,12 +60,12 @@ export class Generator<T extends Record<string, any>> {
     this.audience = params.audience
   }
 
-  sign(payload: T, expirationMs: number, subject: string) {
+  sign(expirationMs: number, subject: string, payload?: T) {
     if (!expirationMs || !subject) {
       throw new Error('missing options')
     }
 
-    return jwt.sign(payload, this.key, {
+    return jwt.sign(payload ?? {}, this.key, {
       algorithm: 'HS256',
       expiresIn: `${expirationMs}ms`,
       audience: this.audience,

@@ -50,9 +50,33 @@ let generator = new Generator<Data>({
 })
 
 async function main() {
-  let token = generator.sign({
+  let token = generator.sign(1000, 'test', {
     // ... put your token content here
-  }, 1000, 'test')
+  })
+
+  try {
+    let data = generator.verify(token)
+  } catch (error: any) {
+    console.error(error)
+  }
+}
+
+main()
+```
+
+### Sign and verify symmetric tokens with no payload
+
+```ts
+import { Generator } from '@altipla/jwt'
+
+let generator = new Generator({
+  key: 'test-key',
+  issuer: 'https://www.example.com/issuer',
+  audience: 'foo',
+})
+
+async function main() {
+  let token = generator.sign(1000, 'test')
 
   try {
     let data = generator.verify(token)
